@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Modern Essentials{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-text">
+    <h1>Oakline</h1>
+    <p>Earth-tone essentials with a quiet, old-money feel.</p>
+    <a href="{{ url_for('products') }}" class="btn-primary">Shop Collection</a>
+  </div>
+  <div class="hero-side">
+    <p class="hero-tag">FW25 Drop · Limited pieces</p>
+    <ul class="hero-list">
+      <li>Heavyweight hoodies</li>
+      <li>Boxy tees</li>
+      <li>Clean minimal branding</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <h2>Featured Piece</h2>
+    <a href="{{ url_for('products') }}" class="link">View all →</a>
+  </div>
+
+  <div class="grid">
+    {% for product in products %}
+      <a class="card" href="{{ url_for('product_detail', product_id=product.id) }}">
+        <div class="card-image">
+          <img src="{{ product.image_url }}" alt="{{ product.name }}">
+        </div>
+        <div class="card-body">
+          <h3>{{ product.name }}</h3>
+          <p class="card-tagline">{{ product.tagline }}</p>
+          <p class="card-price">${{ "%.2f"|format(product.price) }} CAD</p>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

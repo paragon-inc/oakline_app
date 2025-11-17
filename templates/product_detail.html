@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<section class="section product-detail">
+  <div class="product-image-wrap">
+    <img src="{{ product.image_url }}" alt="{{ product.name }}">
+  </div>
+
+  <div class="product-info">
+    <h1>{{ product.name }}</h1>
+    <p class="product-price">${{ "%.2f"|format(product.price) }} CAD</p>
+    <p class="product-tagline">{{ product.tagline }}</p>
+    <p class="product-desc">{{ product.description }}</p>
+
+    {% if product.in_stock %}
+      <button class="btn-primary">Add to Cart (demo)</button>
+      <p class="note">This is just a demo. Later you can connect real payments (Stripe, etc.).</p>
+    {% else %}
+      <button class="btn-disabled" disabled>Sold Out</button>
+    {% endif %}
+
+    <div class="product-meta">
+      <h3>Details</h3>
+      <ul>
+        <li>Designed by Oakline</li>
+        <li>Unisex fit</li>
+        <li>True to size (size guide coming soon)</li>
+      </ul>
+    </div>
+
+    <a class="link" href="{{ url_for('products') }}">← Back to all products</a>
+  </div>
+</section>
+{% endblock %}

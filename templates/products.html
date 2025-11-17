@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Shop{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="section-header">
+    <h1>Shop Oakline</h1>
+    <p>Curated pieces in neutral, earthy tones.</p>
+  </div>
+
+  <div class="grid">
+    {% for product in products %}
+      <a class="card" href="{{ url_for('product_detail', product_id=product.id) }}">
+        <div class="card-image">
+          <img src="{{ product.image_url }}" alt="{{ product.name }}">
+        </div>
+        <div class="card-body">
+          <h3>{{ product.name }}</h3>
+          <p class="card-tagline">{{ product.tagline }}</p>
+          <p class="card-price">${{ "%.2f"|format(product.price) }} CAD</p>
+          {% if product.in_stock %}
+            <span class="badge badge-in">In stock</span>
+          {% else %}
+            <span class="badge badge-out">Sold out</span>
+          {% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
